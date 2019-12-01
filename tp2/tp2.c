@@ -7,6 +7,14 @@
 #include <stdint.h>
 #include <stdio.h>
 
+struct block{
+  size_t size;
+  struct block *next;
+  int free;
+  int magic; // For debugging only. TODO: remove this in non-debug mode.
+};
+
+
 #define _Q1_
 
 #ifdef _Q1_
@@ -26,8 +34,10 @@ void * memalloc(int size){
 }
 #endif
 
+
 int main (int argc, char *argv[]){
-    printf("%p\n", tas_ptr);
-    memalloc(24);
-    printf("%p\n", tas_ptr);
+    //printf("%p\n", tas_ptr);
+    //memalloc(24);
+    //printf("%p\n", tas_ptr);
+    memalloc2(4);
 }
