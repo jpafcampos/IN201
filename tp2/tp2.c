@@ -7,12 +7,21 @@
 #include <stdint.h>
 #include <stdio.h>
 
-struct block{
+struct Block{
   size_t size;
-  struct block *next;
+  struct Block *next;
   int free;
-  int magic; // For debugging only. TODO: remove this in non-debug mode.
 };
+
+struct Block *find_free_block(struct Block **last, size_t size) {
+  struct Block *current = NULL;
+  while (current && !(current->free && current->size >= size)) {
+    *last = current;
+    current = current->next;
+  }
+  return current;
+
+}
 
 
 #define _Q1_
